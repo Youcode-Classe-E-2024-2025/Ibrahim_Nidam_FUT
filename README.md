@@ -94,7 +94,6 @@ Calcul de la Chimie de l'Équipe (Bonus)
 
     Pour une équipe de 11 joueurs, tu fais la somme de la chimie de chaque joueur et tu obtiens le score total de chimie de l'équipe
 
-    Le score total est normalisé sur une échelle de 0 à 100
 
 ## **Modalités pédagogiques**
 
