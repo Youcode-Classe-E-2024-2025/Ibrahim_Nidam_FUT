@@ -138,8 +138,10 @@
           </div> -->
 
     <section id="info" class="flex flex-col gap-4 w-96">
+      <!-- CLEAR CARDS BUTTON  -->
       <button id="clear-cards" class="bg-denim-100 text-white p-4 w-full transform active:scale-90 transition duration-150">Remove All Players</button>
       
+      <!-- CREATE SQUAD -->
       <div class="create-squad py-4 px-2 text-sm 425:text-base shadow-md text-nowrap flex items-center gap-2">
         <label for="team" class="whitespace-nowrap">Create Squad</label>
         <input 
@@ -157,6 +159,7 @@
         </button>
       </div>
 
+      <!-- CHANGE FORMATION -->
       <div class="squad-formation py-4 px-2 shadow-md text-nowrap flex items-center gap-2">
         <label for="formation" class="whitespace-nowrap">Formation:</label>
         <select 
@@ -169,6 +172,7 @@
         </select>
       </div>
 
+      <!-- ADD / SEE ALL PLAYERS  -->
       <div class="add-player flex py-4 px-2 justify-between shadow-md ">
         <p id="all-players" class="underline cursor-pointer hover:text-light_orange-400">See All Players</p>
         <div class="flex">
@@ -195,17 +199,213 @@
         </div>
       </section>
 
-      <!-- See all players  -->
-      <section id="all-players" class="flex-col flex">
+      <!-- SEE ALL PLAYERS  -->
+      <section id="all-players" class="flex-col hidden">
         <p class="mb-4">Choose a Player</p>
           <div class="players flex flex-wrap justify-center max-h-[250px] overflow-y-auto">
-            <!-- See all players HERE  -->
+            <!-- SEE ALL PLAYERS HERE  -->
         </div>
       </section>
     </section>
 
+    <!-- FORM SECTION -->
     <section id="add-player-form">
+      <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white w-[500px] p-6 rounded-lg shadow-lg overflow-y-auto">
+          <form class="space-y-4">
+            <h2 class="text-2xl font-semibold text-center">ADD PLAYER</h2>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="name" class="block font-medium">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="border border-gray-300 outline-none text-sm py-2 px-3 w-full rounded"
+                  placeholder="Enter player's name"
+                  required
+                >
+              </div>
+              <div>
+                <label for="photo" class="block font-medium">Photo</label>
+                <input
+                  type="file"
+                  id="photo"
+                  class="border border-gray-300 outline-none text-sm py-2 px-3 w-full rounded"
+                  accept="image/*"
+                  required
+                >
+              </div>
       
+              <div>
+                <label for="position" class="block font-medium">Position</label>
+                <select
+                  id="position"
+                  class="border border-gray-300 outline-none text-sm py-2 px-3 w-full rounded"
+                  required
+                >
+                  <option value="" disabled selected>Select position</option>
+                  <option value="LWB">LWB</option>
+                  <option value="CB">CB</option>
+                  <option value="RB">RB</option>
+                  <option value="RWB">RWB</option>
+                  <option value="LWM">LWM</option>
+                  <option value="CM">CM</option>
+                  <option value="RM">RM</option>
+                  <option value="RWM">RWM</option>
+                  <option value="ST">ST</option>
+                  <option value="GK">GK</option>
+                </select>
+              </div>
+              <div>
+                <label for="nationality" class="block font-medium">Nationality</label>
+                <input
+                  type="text"
+                  id="nationality"
+                  class="border border-gray-300 outline-none text-sm py-2 px-3 w-full rounded"
+                  placeholder="Enter nationality"
+                  required
+                >
+              </div>
+      
+              <div>
+                <label for="flag" class="block font-medium">Flag</label>
+                <input
+                  type="file"
+                  id="flag"
+                  class="border border-gray-300 outline-none text-sm py-2 px-3 w-full rounded"
+                  accept="image/*"
+                  required
+                >
+              </div>
+              <div>
+                <label for="logo" class="block font-medium">Club Logo</label>
+                <input
+                  type="file"
+                  id="logo"
+                  class="border border-gray-300 outline-none text-sm py-2 px-3 w-full rounded"
+                  accept="image/*"
+                  required
+                >
+              </div>
+      
+              <div class="col-span-2">
+                <label for="club" class="block font-medium">Club</label>
+                <input
+                  type="text"
+                  id="club"
+                  class="border border-gray-300 outline-none text-sm py-2 px-3 w-full rounded"
+                  placeholder="Enter club name"
+                  required
+                >
+              </div>
+            </div>
+      
+            <div class="grid grid-cols-4 gap-2">
+              <div>
+                <label for="rating" class="block font-medium text-xs">Rating</label>
+                <input
+                  type="number"
+                  id="rating"
+                  class="border border-gray-300 outline-none text-sm py-1 px-2 w-full rounded"
+                  placeholder="0"
+                  min="0"
+                  max="100"
+                  required
+                >
+              </div>
+              <div>
+                <label for="pace" class="block font-medium text-xs">Pace</label>
+                <input
+                  type="number"
+                  id="pace"
+                  class="border border-gray-300 outline-none text-sm py-1 px-2 w-full rounded"
+                  placeholder="0"
+                  min="0"
+                  max="100"
+                  required
+                >
+              </div>
+              <div>
+                <label for="shooting" class="block font-medium text-xs">Shooting</label>
+                <input
+                  type="number"
+                  id="shooting"
+                  class="border border-gray-300 outline-none text-sm py-1 px-2 w-full rounded"
+                  placeholder="0"
+                  min="0"
+                  max="100"
+                  required
+                >
+              </div>
+              <div>
+                <label for="passing" class="block font-medium text-xs">Passing</label>
+                <input
+                  type="number"
+                  id="passing"
+                  class="border border-gray-300 outline-none text-sm py-1 px-2 w-full rounded"
+                  placeholder="0"
+                  min="0"
+                  max="100"
+                  required
+                >
+              </div>
+              <div>
+                <label for="dribbling" class="block font-medium text-xs">Dribbling</label>
+                <input
+                  type="number"
+                  id="dribbling"
+                  class="border border-gray-300 outline-none text-sm py-1 px-2 w-full rounded"
+                  placeholder="0"
+                  min="0"
+                  max="100"
+                  required
+                >
+              </div>
+              <div>
+                <label for="defending" class="block font-medium text-xs">Defending</label>
+                <input
+                  type="number"
+                  id="defending"
+                  class="border border-gray-300 outline-none text-sm py-1 px-2 w-full rounded"
+                  placeholder="0"
+                  min="0"
+                  max="100"
+                  required
+                >
+              </div>
+              <div>
+                <label for="physical" class="block font-medium text-xs">Physical</label>
+                <input
+                  type="number"
+                  id="physical"
+                  class="border border-gray-300 outline-none text-sm py-1 px-2 w-full rounded"
+                  placeholder="0"
+                  min="0"
+                  max="100"
+                  required
+                >
+              </div>
+              <div>
+                <label for="overall" class="block font-medium text-xs">Overall</label>
+                <input
+                  type="number"
+                  id="overall"
+                  class="border border-gray-300 outline-none text-sm py-1 px-2 w-full rounded"
+                  placeholder="0"
+                  min="0"
+                  max="100"
+                  required
+                >
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="bg-denim-100 text-white p-4 w-full transform active:scale-90 transition duration-150">
+              Save Player
+            </button>
+          </form>
+        </div>
+      </div>
     </section>
     
   </main>
