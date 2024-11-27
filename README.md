@@ -9,9 +9,9 @@
 ## Links
 
 - **Brief Presentation:**[View Presentation](https://www.canva.com/design/DAGXelrYFNY/bvZnFNm8cYPRACTahCG5Dw/view?utm_content=DAGXelrYFNY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hf48eebbbea)
-- **Github Backlog:**[View Backlog]()
+- **Github Backlog:**[View Backlog](https://github.com/orgs/Youcode-Classe-E-2024-2025/projects/47/views/1)
 - **GitHub Repository:** [View on GitHub](https://github.com/Youcode-Classe-E-2024-2025/Ibrahim_Nidam_FUT.git)
-- **Hosted Page:** [View Live]()
+- **Hosted Page:** [View Live](https://youcode-classe-e-2024-2025.github.io/Ibrahim_Nidam_FUT/)
 - **Color Palette:** [View Color Palette](https://coolors.co/000000-0060d1-ffd3a6-ffffff)
 
 ### créé : 24/11/24
@@ -94,7 +94,6 @@ Calcul de la Chimie de l'Équipe (Bonus)
 
     Pour une équipe de 11 joueurs, tu fais la somme de la chimie de chaque joueur et tu obtiens le score total de chimie de l'équipe
 
-    Le score total est normalisé sur une échelle de 0 à 100
 
 ## **Modalités pédagogiques**
 
