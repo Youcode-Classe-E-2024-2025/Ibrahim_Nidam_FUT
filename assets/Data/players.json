@@ -259,7 +259,7 @@
       {
         "name": "Alphonso Davies",
         "photo": "https://cdn.sofifa.net/players/234/396/25_120.png",
-        "position": "LB",
+        "position": "LWB",
         "nationality": "Canada",
         "flag": "https://cdn.sofifa.net/flags/ca.png",
         "club": "Bayern Munich",
@@ -327,6 +327,7 @@
         "nationality": "England",
         "flag": "https://cdn.sofifa.net/flags/gb-eng.png",
         "club": "Liverpool",
+        "logo": "https://cdn.sofifa.net/meta/team/14/120.png",
         "rating": 87,
         "pace": 76,
         "shooting": 66,
@@ -370,7 +371,7 @@
       {
         "name": "Noussair Mazraoui",
         "photo": "https://cdn.sofifa.net/players/236/401/25_120.png",
-        "position": "LB",
+        "position": "LWB",
         "nationality": "Morocco",
         "flag": "https://cdn.sofifa.net/flags/ma.png",
         "club": "Manchester United",

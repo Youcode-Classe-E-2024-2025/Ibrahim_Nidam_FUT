@@ -13,7 +13,7 @@
   <link rel="icon" href="assets/images/Favicon/game.png" type="image/x-icon" />
 </head>
 
-<body>
+<body class="max-h-screen">
   <header class="flex justify-center border-b border-b-gray-400 shadow-md p-4">
     <nav class="flex items-center justify-between w-full">
       <img class="cursor-pointer" src="assets/images/icons/profile.svg" alt="">
@@ -26,11 +26,81 @@
     </nav>
   </header>
 
-  <main class="flex justify-around">
+  <main class="flex justify-around mt-12 flex-wrap lg:flex-nowrap">
+    <section id="field" class="relative">
+      <!-- Field Image -->
+      <img src="assets/images/Fields/pngwing.com.png" alt="football field" class="w-full max-w-[800px]">
     
+      <!-- Player Cards -->
+      <!-- ST -->
+      <div class="LST absolute top-[0%] left-[40%] transform -translate-x-1/2 text-center">
+        <!-- LST CARD -->
+      </div>
+      <p class="LST-TEXT text-sm absolute top-[15%] left-[35%] bg-light_orange-500 px-2 rounded-lg inline-block 680:hidden">ST</p>
+
+      <div class="RST absolute top-[0%] left-[60%] transform -translate-x-1/2 text-center">
+        <!-- RST CARD -->
+      </div>
+      <p class="RST-TEXT text-sm absolute top-[15%] left-[60%] bg-light_orange-500 px-2 rounded-lg inline-block 680:hidden">ST</p>
+      
+      <!-- LWM, CM, RM, RWM -->
+      <div class="LWM absolute top-[20%] left-[25%] transform -translate-x-1/2 text-center">
+        <!-- LWM CARD -->
+      </div>
+      <p class="LWM-TEXT text-sm absolute top-[35%] left-[25%] bg-light_orange-500 px-2 rounded-lg inline-block 680:hidden">LWM</p>
+
+      <div class="LCM absolute top-[30%] left-[40%] transform -translate-x-1/2 text-center">
+        <!-- LCM CARD -->
+      </div>
+      <p class="LCM-TEXT text-sm absolute top-[45%] 475:top-[40%] left-[35%] bg-light_orange-500 px-2 rounded-lg inline-block 680:hidden">CM</p>
+
+      <div class="RCM absolute top-[30%] left-[60%] transform -translate-x-1/2 text-center">
+        <!-- RCM CARD -->
+      </div>
+      <p class="RCM-TEXT text-sm absolute top-[45%] 475:top-[40%] left-[60%] bg-light_orange-500 px-2 rounded-lg inline-block 680:hidden">CM</p>
+
+      <div class="RWM absolute top-[20%] left-[75%] transform -translate-x-1/2 text-center">
+        <!-- RWM CARD -->
+      </div>
+      <p class="RWM-TEXT text-sm absolute top-[35%] left-[68%] bg-light_orange-500 px-2 rounded-lg inline-block 680:hidden">RWM</p>
+    
+      <!-- LWB, CB, RB, RWB -->
+      <div class="LWB absolute top-[50%] left-[20%] transform -translate-x-1/2 text-center">
+        <!-- LWB CARD -->
+      </div>
+      <p class="LWB-TEXT text-sm absolute top-[55%] left-[23%] bg-light_orange-500 px-2 rounded-lg inline-block 680:hidden ">LWB</p>
+
+      <div class="LCB absolute top-[58%] left-[35%] transform -translate-x-1/2 text-center">
+        <!-- LCB CARD -->
+      </div>
+      <p class="LCB-TEXT text-sm absolute top-[70%] left-[35%] bg-light_orange-500 px-2 rounded-lg inline-block 680:hidden">CB</p>
+
+      <div class="RCB absolute top-[58%] left-[65%] transform -translate-x-1/2 text-center">
+        <!-- RCB CARD -->
+      </div>
+      <p class="RCB-TEXT text-sm absolute top-[70%] left-[60%] bg-light_orange-500 px-2 rounded-lg inline-block 680:hidden">CB</p>
+
+      <div class="RWB absolute top-[50%] left-[80%] transform -translate-x-1/2 text-center">
+        <!-- RWB CARD -->
+      </div>
+      <p class="RWB-TEXT text-sm absolute top-[55%] left-[70%] bg-light_orange-500 px-2 rounded-lg inline-block 680:hidden">RWB</p>
+    
+      <!-- GK -->
+      <div class="GK absolute bottom-[7%] left-[50%] transform -translate-x-1/2 text-center">
+        <!-- GK CARD -->
+      </div>
+      <p class="GK-TEXT text-sm absolute bottom-[7%] left-[45%] 425:left-[47%] bg-light_orange-500 px-2 rounded-lg inline-block 680:hidden">GK</p>
+      
+    </section>
+   
+    
+    
+    <section id="info">
+
+    </section>
   </main>
 
-  <footer class="bg-denim-300 text-white text-center p-4">
+  <footer class="bg-denim-300 text-white text-center p-4 fixed w-full bottom-0">
     <p>&copy; 2014-2025 FUT. All FIFA assets are property of EA Sports.</p>
   </footer>
   <script src="assets/js/index.js"></script>
