@@ -13,7 +13,7 @@
   <link rel="icon" href="assets/images/Favicon/game.png" type="image/x-icon" />
 </head>
 
-<body class="max-h-screen">
+<body class="min-h-screen flex flex-col">
   <header class="flex justify-center border-b border-b-gray-400 shadow-md p-4">
     <nav class="flex items-center justify-between w-full">
       <img class="cursor-pointer" src="assets/images/icons/profile.svg" alt="">
@@ -26,7 +26,7 @@
     </nav>
   </header>
 
-  <main class="flex justify-around mt-12 flex-wrap lg:flex-nowrap">
+  <main class="flex justify-around mt-12 flex-wrap lg:flex-nowrap flex-grow">
     <section id="field" class="relative">
       <!-- Field Image -->
       <img src="assets/images/Fields/pngwing.com.png" alt="football field" class="w-full max-w-[800px]">
@@ -122,13 +122,56 @@
           <p class="physical absolute left-12 top-[87px]">PHY : <span>20</span></p>
         </div> -->
 
-        
-    <section id="info">
+    <section id="info" class="flex flex-col gap-4 w-96">
+      <button id="clear-cards" class="bg-denim-100 text-white p-4 w-full transform active:scale-90 transition duration-150">Remove All Players</button>
+      
+      <div class="create-squad py-4 px-2 text-sm 425:text-base shadow-md text-nowrap flex items-center gap-2">
+        <label for="team" class="whitespace-nowrap">Create Squad</label>
+        <input 
+          type="text" 
+          class="border border-denim-200 outline-none text-sm py-2 pl-2 flex-grow" 
+          placeholder="Squad name"
+          maxlength="16"
+        >
+        <button id="save-formation">
+          <img 
+            class="inline-block hover:scale-105 cursor-pointer w-6 h-6 transform active:scale-90 transition duration-150" 
+            src="assets/images/icons/save.svg" 
+            alt="Save"
+          >
+        </button>
+      </div>
+
+      <div class="squad-formation py-4 px-2 shadow-md text-nowrap flex items-center gap-2">
+        <label for="formation" class="whitespace-nowrap">Formation:</label>
+        <select 
+          name="squad-formation" 
+          id="formation" 
+          class="border border-denim-200 outline-none text-sm py-2 px-3 flex-grow cursor-pointer "
+        >
+          <option selected value="4-4-2">4-4-2</option>
+          <option value="4-3-3">4-3-3</option>
+        </select>
+      </div>
+
+      <div class="add-player flex py-4 px-2 justify-between shadow-md ">
+        <p id="all-players" class="underline cursor-pointer hover:text-light_orange-400">See All Players</p>
+        <div class="flex">
+          <p>Add Player</p>
+          <button id="add-player" class="hover:scale-105 cursor-pointer transform active:scale-90 transition duration-150">
+            <img src="assets/images/icons/plus in a box.svg" alt="">
+          </button>
+        </div>
+      </div>
+
+      
+      
 
     </section>
+    
   </main>
-
-  <footer class="bg-denim-300 text-white text-center p-4 fixed w-full bottom-0">
+  
+  <footer class="bg-denim-300 text-white text-center p-4 w-full mt-10">
     <p>&copy; 2014-2025 FUT. All FIFA assets are property of EA Sports.</p>
   </footer>
   <script src="assets/js/index.js"></script>
