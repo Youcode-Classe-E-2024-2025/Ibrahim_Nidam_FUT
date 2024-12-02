@@ -217,7 +217,7 @@ form.addEventListener("submit", e =>{
                 } else {
                     // UPDATE WITH EDITED NEW INFORMATION START
                     const placeholder_card = document.getElementById(`${updated_player.position.toLowerCase()}-placeholder`)
-                    if(placeholder_card && placeholder_card.classList.contains("flex")){
+                    if(placeholder_card){
                         placeholder_card.innerHTML = `
                             <div class="relative text-light_orange-500 cursor-pointer text-[8px] font-normal hidden 680:block">
                                 <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
