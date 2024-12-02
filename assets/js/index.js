@@ -368,7 +368,8 @@ function displayCardCentered(element,index){
         dataArray.splice(index,1)
         document.body.removeChild(lay_over)
         displayPlayers()
-        
+    
+
     // HANDLE IF PLAYER REMOVED IS IN THE FIELD START
     const deleted_player_position = element.position
     const deleted_player_name = element.name
