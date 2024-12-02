@@ -32,6 +32,10 @@ const dribbling_input = document.querySelector('label[for="dribbling"]');
 const defending_input = document.querySelector('label[for="defending"]');
 const physical_input = document.querySelector('label[for="physical"]');
 
+// DECLARATION OF SETS USED
+const selected_player = new Set()
+const reserve_selected_player = new Set()
+
 // DECLARATION OF VARIABLES
 let dataArray = null
 let editIndex = null
@@ -119,3 +123,171 @@ function updateLabel(){
 }
 position_input.addEventListener("change",updateLabel)
 // LABEL UPDATE FOR GOAL KEEPER CASE END
+
+// FORM HANDLING FUNCTION FOR ADDING AND EDITING THE PLAYERS START
+form.addEventListener("submit", e =>{
+    e.preventDefault()
+
+    const name_input = document.getElementById("name").value.trim()
+    const nationality_input = document.getElementById("nationality").value.trim()
+    const club_input = document.getElementById("club").value.trim()
+
+    // VALIDATION START
+    const has_only_one_word = /^\w+$/
+    const has_Numbers_Or_Special_Chars = /[^A-Za-z\s]/
+
+    const name_test = has_Numbers_Or_Special_Chars.test(name_input)
+    const club_test = has_Numbers_Or_Special_Chars.test(club_input)
+    const nationality_test = has_Numbers_Or_Special_Chars.test(nationality_input)
+    const nationality_one_word_test = has_only_one_word.test(nationality_input)
+
+    if (!nationality_one_word_test){
+        alert("Nationality should be one word")
+        return
+    }
+
+    if (name_test || club_test || nationality_test){
+        alert("name, club or nationality should not contain numbers or special characters.")
+        return
+    }
+    // VALIDATION END
+
+    // HANDLE EDIT START
+    if (editIndex !== null){
+        photo_div.classList.remove("hidden")
+        logo_div.classList.remove("hidden")
+        flag_div.classList.remove("hidden")
+    }
+
+    if(editIndex !== null){
+        const original_player = dataArray[editIndex]
+        const updated_player = {
+            ...original_player,
+            name: name_input,
+            nationality: nationality_input,
+            club: club_input,
+            position: position_input.value,
+            rating: rating_input.value,
+        }
+
+        // REASSIGN STATS BASED ON THE POSITION START
+        if (position_input.value === "GK") {
+            updated_player.diving = document.getElementById("pace").value;
+            updated_player.handling = document.getElementById("shooting").value;
+            updated_player.kicking = document.getElementById("passing").value;
+            updated_player.reflexes = document.getElementById("dribbling").value;
+            updated_player.speed = document.getElementById("defending").value;
+            updated_player.positioning = document.getElementById("physical").value;
+        } else {
+            updated_player.pace = document.getElementById("pace").value;
+            updated_player.shooting = document.getElementById("shooting").value;
+            updated_player.passing = document.getElementById("passing").value;
+            updated_player.dribbling = document.getElementById("dribbling").value;
+            updated_player.defending = document.getElementById("defending").value;
+            updated_player.physical = document.getElementById("physical").value;
+        }
+        // REASSIGN STATS BASED ON THE POSITION END
+
+        selected_player.forEach(player => {
+            if(player.name === original_player.name && player.position === original_player.position){
+                selected_player.delete(player)
+
+                // REMOVE FROM FIELD IF POSITION CHANGED START
+                if(original_player.position !== updated_player.position){
+                    const old_placeholder = document.getElementById(`${original_player.position.toLowerCase()}-placeholder`)
+                    if(old_placeholder){
+                        old_placeholder.innerHTML = `
+                            <div class="relative items-center justify-center font-bold text-light_orange-500 hidden 680:flex">
+                                <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
+                                <div class="absolute flex items-center justify-center inset-0 cursor-pointer">
+                                    <span class="flex items-center justify-center">
+                                        <svg class="w-9 h-8" viewBox="0 0 36 42" fill="none">
+                                            <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" 
+                                                stroke="currentColor" stroke-width="1.5"></path>
+                                        </svg>
+                                    </span>
+                                    <div class="absolute text-xl font-bold text-center">+</div>
+                                </div>
+                            </div>
+                        `
+                        old_placeholder.classList.remove("flex")
+                        old_placeholder.classList.add("hidden")
+                    }
+                    // REMOVE FROM FIELD IF POSITION CHANGED END
+                } else {
+                    // UPDATE WITH EDITED NEW INFORMATION START
+                    const placeholder_card = document.getElementById(`${updated_player.position.toLowerCase()}-placeholder`)
+                    if(placeholder_card && placeholder_card.classList.contains("flex")){
+                        placeholder_card.innerHTML = `
+                            <div class="relative text-light_orange-500 cursor-pointer text-[8px] font-normal hidden 680:block">
+                                <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
+                                <img class="w-14 h-14 absolute left-7 top-4" src="${updated_player.photo}" alt="">
+                                <div class="flag w-2 h-2 absolute left-5 top-1/3" style="background-image: url(${updated_player.flag}); background-size: contain; background-repeat: no-repeat;"></div>
+                                <p class="position absolute left-[19px] font-bold top-3">${updated_player.name} </p>
+                                <p class="position absolute left-[18px] font-bold top-7">${updated_player.position}</p>
+                                <p class="rating absolute left-5 top-[50px] font-bold">${updated_player.rating}</p>
+                                <p class="shooting absolute left-4 top-[78px]">${updated_player.position == "GK" ? "DIV" : "SHO"} : <span>${updated_player.position == "GK" ? updated_player.diving : updated_player.shooting}</span></p>
+                                <p class="pace absolute left-4 top-24">${updated_player.position == "GK" ? "HAN :" : "PAC : "}<span>${updated_player.position == "GK" ? updated_player.handling : updated_player.pace}</span></p>
+                                <p class="passing absolute left-4 top-[87px]">${updated_player.position == "GK" ? "KIC : " : "PAS : "}<span>${updated_player.position == "GK" ? updated_player.kicking : updated_player.passing}</span></p>
+                                <p class="dribbling absolute left-12 top-[78px]">${updated_player.position == "GK" ? "REF :" : "DRI : "}<span>${updated_player.position == "GK" ? updated_player.reflexes : updated_player.dribbling}</span></p>
+                                <p class="defending absolute left-12 top-24">${updated_player.position == "GK" ? "SPD : " : "DEF : "}<span>${updated_player.position == "GK" ? updated_player.speed : updated_player.defending}</span></p>
+                                <p class="physical absolute left-12 top-[87px]">${updated_player.position == "GK" ? "POS : " : "PHY : "}<span>${updated_player.position == "GK" ? updated_player.positioning : updated_player.physical}</span></p>
+                            </div>
+                        `
+                        selected_player.add({name: updated_player.name, position: updated_player.position})
+                    }
+                    // UPDATE WITH EDITED NEW INFORMATION END
+                }
+            }
+        })
+        dataArray[editIndex] = updated_player
+        save_button_form.innerText = "Save Player"
+        h2.innerText = "Add Player"
+        editIndex = null
+        // HANDLE EDIT END
+
+        // ADDING NEW PLAYER START
+    }else{
+        if(position_input.value == "GK"){
+            new_player_card = {
+                name : name_input,
+                photo: photo_input.files[0] ? URL.createObjectURL(photo_input.files[0]) : "assets/images/default_images/default_profile.png",
+                position : position_input.value,
+                nationality : nationality_input,
+                flag : flag_input.files[0] ? URL.createObjectURL(flag_input.files[0]) : "assets/images/default_images/default_flag.png",
+                club : club_input,
+                logo : logo_input.files[0] ? URL.createObjectURL(logo_input.files[0]) : null,
+                rating : rating_input.value,
+                diving : document.getElementById("pace").value,
+                handling : document.getElementById("shooting").value,
+                kicking : document.getElementById("passing").value,
+                reflexes : document.getElementById("dribbling").value,
+                speed : document.getElementById("defending").value,
+                positioning : document.getElementById("physical").value,
+            }
+        }else{
+            new_player_card = {
+                name : name_input,
+                photo : photo_input.files[0] ? URL.createObjectURL(photo_input.files[0]) : "assets/images/default_images/default_profile.png",
+                position : position_input.value,
+                nationality : nationality_input,
+                flag : flag_input.files[0] ? URL.createObjectURL(flag_input.files[0]) : "assets/images/default_images/default_flag.png",
+                club : club_input,
+                logo : logo_input.files[0] ? URL.createObjectURL(logo_input.files[0]) : null,
+                rating : rating_input.value,
+                pace : document.getElementById("pace").value,
+                shooting : document.getElementById("shooting").value,
+                passing : document.getElementById("passing").value,
+                dribbling : document.getElementById("dribbling").value,
+                defending : document.getElementById("defending").value,
+                physical : document.getElementById("physical").value,
+            }
+        }
+        dataArray.push(new_player_card);
+    }
+    // ADDING NEW PLAYER END
+    displayPlayers()
+    form.reset()
+    add_player_form.classList.add("hidden")
+})
+// FORM HANDLING FUNCTION FOR ADDING AND EDITING THE PLAYERS END
