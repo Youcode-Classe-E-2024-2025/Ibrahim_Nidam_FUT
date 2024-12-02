@@ -98,3 +98,24 @@ form_layover.addEventListener("click",()=>{
 
 form.addEventListener("click", e => e.stopPropagation())
 //HANDLE TOGGLE OF FORM END
+
+// LABEL UPDATE FOR GOAL KEEPER CASE START
+function updateLabel(){
+    if(position_input.value == "GK"){
+        pace_input.innerText = "Diving"
+        shooting_input.innerText = "Handling"
+        passing_input.innerText = "Kicking"
+        dribbling_input.innerText = "Reflexes"
+        defending_input.innerText = "Speed"
+        physical_input.innerText = "Positioning"
+    } else {
+        pace_input.innerText = "Pace"
+        shooting_input.innerText = "Shooting"
+        passing_input.innerText = "Passing"
+        dribbling_input.innerText = "Dribbling"
+        defending_input.innerText = "Defending"
+        physical_input.innerText = "Physical"
+    }
+}
+position_input.addEventListener("change",updateLabel)
+// LABEL UPDATE FOR GOAL KEEPER CASE END
