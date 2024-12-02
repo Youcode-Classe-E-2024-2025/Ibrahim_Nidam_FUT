@@ -704,6 +704,41 @@ function populateReservePlayersSection(targetPosition){
 }
 // FUNCTION TO POPULATE THE RESERVE SECTION END
 
+// FUNCTION THAT FILLS RESERVE FUNCTION WITH PLACEHOLDERS AND HANDLES CLICKS START
+function reserveSection() {
+    const reserve_section = document.querySelector(".reserve-players");
+
+    positions.forEach(position => {
+        const card_container = document.createElement("div");
+        card_container.classList.add("reserve-" + position.toLowerCase() + "-placeholder", "relative","flex","flex-col","items-center","justify-center","m-2","font-bold","text-light_orange-500","cursor-pointer","transition");
+        
+        const card_image = document.createElement("img");
+        card_image.src = "assets/images/Player/Player_card.png";
+        card_image.alt = "Player Card";
+        card_image.classList.add("w-[90px]", "h-auto");
+        
+        const position_label = document.createElement("p");
+        position_label.setAttribute("data-position",position)
+        position_label.textContent = position;
+        position_label.classList.add("text-xs", "text-center", "text-black", "mt-1");
+        
+        card_container.appendChild(card_image);
+        card_container.appendChild(position_label);
+        
+        card_container.addEventListener("click", () => {
+            currentPosition = position;
+            isAllPlayersSectionOpen = false;
+            isReservePlayerSectionOpen = true;
+            isFilteredPlayerSectionOpen = false;
+            populateReservePlayersSection(position);
+            updateOpenCloseSection();
+        });
+        
+        reserve_section.appendChild(card_container);
+    });
+}
+// FUNCTION THAT FILLS RESERVE FUNCTION WITH PLACEHOLDERS AND HANDLES CLICKS END
+
 // FUNCTIONS TO START WITH PAGE LOAD START
 document.addEventListener("DOMContentLoaded", () => {
     getData()
