@@ -606,8 +606,40 @@ function handleLabelClick(targetPosition){
 }
 // HANDLE LABLE CLICK FOR MOBILE END
 
+// HANDLE TOGGLE SECTIONS START
+function updateOpenCloseSection(){
+    if (isAllPlayersSectionOpen) {
+        see_all_players_section.classList.remove("hidden");
+        filtered_players_section.classList.add("hidden");
+        players_reserve_section.classList.add("hidden");
+        isFilteredPlayerSectionOpen = false
+        isReservePlayerSectionOpen = false
+    } else if (isFilteredPlayerSectionOpen) {
+        filtered_players_section.classList.remove("hidden");
+        see_all_players_section.classList.add("hidden");
+        players_reserve_section.classList.add("hidden");
+        isReservePlayerSectionOpen = false
+        isAllPlayersSectionOpen = false
+    } else if (isReservePlayerSectionOpen) {
+        players_reserve_section.classList.remove("hidden");
+        see_all_players_section.classList.add("hidden");
+        filtered_players_section.classList.add("hidden");
+        isAllPlayersSectionOpen = false
+        isFilteredPlayerSectionOpen = false
+    } else {
+        see_all_players_section.classList.add("hidden");
+        filtered_players_section.classList.add("hidden");
+        players_reserve_section.classList.remove("hidden");
+        isAllPlayersSectionOpen = false
+        isFilteredPlayerSectionOpen = false
+        isReservePlayerSectionOpen = true
+    }
+}
+// HANDLE TOGGLE SECTIONS END
+
 // FUNCTIONS TO START WITH PAGE LOAD START
 document.addEventListener("DOMContentLoaded", () => {
     getData()
+    updateOpenCloseSection()
 })
 // FUNCTIONS TO START WITH PAGE LOAD END
