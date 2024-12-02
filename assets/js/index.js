@@ -73,3 +73,28 @@ see_all_players_button.addEventListener("click",()=>{
     updateOpenCloseSection()
 })
 // HANDLE TOGGLE OF ALL PLAYERS SECTION END
+
+//HANDLE TOGGLE OF FORM START
+add_player_button.addEventListener("click",()=>{
+    form.reset()
+    editIndex = null
+    save_button_form.innerText = "Save Player"
+    h2.innerText = "Add Player"
+    if(editIndex == null){
+        photo_div.classList.remove("hidden")
+        logo_div.classList.remove("hidden")
+        flag_div.classList.remove("hidden")
+    }
+    add_player_form.classList.remove("hidden")
+})
+
+close_form_button.addEventListener("click",()=>{
+    add_player_form.classList.add("hidden")
+})
+
+form_layover.addEventListener("click",()=>{
+    add_player_form.classList.add("hidden")
+})
+
+form.addEventListener("click", e => e.stopPropagation())
+//HANDLE TOGGLE OF FORM END
