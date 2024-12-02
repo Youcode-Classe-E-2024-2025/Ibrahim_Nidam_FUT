@@ -536,6 +536,34 @@ function populatePlayersSection(targetPosition){
 }
 // FUNCTION TO POPULATE FILTERED SECTION END
 
+// POSITION PLAYERS INSIDE THE FIELD FUNCTION START
+const positions = ["LST", "RST", "LWM", "LCM", "RCM", "RWM", "LWB", "LCB", "RCB", "RWB", "GK"];
+
+positions.forEach(position => {
+    const placeholder_card = document.getElementById(`${position.toLowerCase()}-placeholder`)
+    const text_label = document.querySelector(`.${position}-TEXT`)
+
+    // FOR DESKTOP
+    placeholder_card.addEventListener("click", () =>{
+        currentPosition = position
+        isAllPlayersSectionOpen = false
+        isFilteredPlayerSectionOpen = true
+        isReservePlayerSectionOpen = false
+        populatePlayersSection(position)
+        updateOpenCloseSection()
+    })
+    // FOR MOBILE
+    text_label.addEventListener("click", () =>{
+        currentPosition = position
+        isAllPlayersSectionOpen = false
+        isFilteredPlayerSectionOpen = true
+        isReservePlayerSectionOpen = false
+        populatePlayersSection(position)
+        updateOpenCloseSection()
+    })
+})
+// POSITION PLAYERS INSIDE THE FIELD FUNCTION END
+
 // FUNCTIONS TO START WITH PAGE LOAD START
 document.addEventListener("DOMContentLoaded", () => {
     getData()
