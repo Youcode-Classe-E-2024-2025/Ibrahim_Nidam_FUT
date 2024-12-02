@@ -416,6 +416,45 @@ function displayCardCentered(element,index){
 }
 // FUNCTION TO DISPLAY CARDS CENTERED TO EDIT OR DELETE END
 
+// FUNCTION TO POPULATE THE EDIT FORM START
+function editPlayer(index){
+    const player = dataArray[index]
+    
+    updateLabel()
+
+    document.getElementById("name").value = player.name;
+    document.getElementById("nationality").value = player.nationality;
+    document.getElementById("club").value = player.club;
+    document.getElementById("position").value = player.position;
+    document.getElementById("rating").value = player.rating;
+
+    if (player.position !== "GK") {
+        document.getElementById("pace").value = player.pace;
+        document.getElementById("shooting").value = player.shooting;
+        document.getElementById("passing").value = player.passing;
+        document.getElementById("dribbling").value = player.dribbling;
+        document.getElementById("defending").value = player.defending;
+        document.getElementById("physical").value = player.physical;
+    } else {
+        document.getElementById("pace").value = player.diving;
+        document.getElementById("shooting").value = player.handling;
+        document.getElementById("passing").value = player.kicking;
+        document.getElementById("dribbling").value = player.reflexes;
+        document.getElementById("defending").value = player.speed;
+        document.getElementById("physical").value = player.positioning;
+    }
+
+    // HIDE PICTURE INPUTS START
+    photo_div.classList.add("hidden")
+    logo_div.classList.add("hidden")
+    flag_div.classList.add("hidden")
+    // HIDE PICTURE INPUTS END
+
+    save_button_form.innerText = "Save Edits"
+    h2.innerText = "Edit Player"
+}
+// FUNCTION TO POPULATE THE EDIT FORM END
+
 // FUNCTIONS TO START WITH PAGE LOAD START
 document.addEventListener("DOMContentLoaded", () => {
     getData()
