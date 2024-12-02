@@ -739,9 +739,89 @@ function reserveSection() {
 }
 // FUNCTION THAT FILLS RESERVE FUNCTION WITH PLACEHOLDERS AND HANDLES CLICKS END
 
+// FUNCTION THAT HANDLES THE CLEAR BUTTONS START 
+function clearButtons(){
+    // CLEAR SELECTED PLAYER START
+    clear_player_card.addEventListener("click",()=> {
+        if(!currentPosition) return
+        const placeholder_card_selector = isReserve ? `.reserve-${currentPosition.toLowerCase()}-placeholder` : `#${currentPosition.toLowerCase()}-placeholder`
+        const placeholder_card = document.querySelector(placeholder_card_selector)
+
+        placeholder_card.innerHTML = isReserve ? `
+        <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
+        <p class="text-xs text-center text-black mt-1">${currentPosition}</p>
+        ` : 
+        `
+        <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
+            <div class="absolute flex items-center justify-center inset-0 cursor-pointer">
+                <span class="flex items-center justify-center">
+                    <svg class="w-9 h-8" viewBox="0 0 36 42" fill="none">
+                        <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" 
+                            stroke="currentColor" stroke-width="1.5"></path>
+                    </svg>
+                </span>
+            <div class="absolute text-xl font-bold text-center">+</div>
+        </div>
+        `
+        const selected_set = isReserve ? reserve_selected_player : selected_player
+        const player_to_remove = Array.from(selected_set).find(player => player.position === currentPosition)
+        if(player_to_remove){
+            selected_player.delete(player_to_remove)
+        }
+        currentPosition = null
+        const players_section = isReserve ? document.getElementById("players-reserve") : filtered_players_section
+        players_section.classList.add("hidden")
+        if(isReserve){
+            isReserve = false
+        }
+        isFilteredPlayerSectionOpen = false
+        updateOpenCloseSection()
+    })
+    // CLEAR SELECTED PLAYER END
+    
+    // CLEAR ALL CARDS START
+    clear_all_cards_button.addEventListener("click",()=>{
+        const main_placeholders = document.querySelectorAll('[id$="-placeholder"]')
+        main_placeholders.forEach(placeholder_card => {
+            placeholder_card.innerHTML = `
+                <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
+                <div class="absolute flex items-center justify-center inset-0 cursor-pointer">
+                    <span class="flex items-center justify-center">
+                        <svg class="w-9 h-8" viewBox="0 0 36 42" fill="none">
+                            <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" 
+                                stroke="currentColor" stroke-width="1.5"></path>
+                        </svg>
+                    </span>
+                    <div class="absolute text-xl font-bold text-center">+</div>
+                </div>
+            `
+        })
+        selected_player.clear()
+        const reserve_placeholders = document.querySelectorAll('.reserve-players [class*="-placeholder"]')
+        reserve_placeholders.forEach(placeholder_card => {
+            const position = placeholder_card.querySelector('.position:nth-of-type(2)').textContent
+            placeholder_card.innerHTML = `
+                <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
+                <p class="text-xs text-center text-black mt-1">${position}</p>
+            `
+        })
+        reserve_selected_player.clear()
+        document.getElementById("players-reserve").classList.add("hidden")
+        filtered_players_section.classList.add('hidden');
+        isReservePlayerSectionOpen = false;
+        isFilteredPlayerSectionOpen = false;
+        updateOpenCloseSection();
+    })
+    // CLEAR ALL CARDS END
+
+}
+// FUNCTION THAT HANDLES THE CLEAR BUTTONS END
+
 // FUNCTIONS TO START WITH PAGE LOAD START
 document.addEventListener("DOMContentLoaded", () => {
     getData()
     updateOpenCloseSection()
+    clearButtons()
+    reserveSection()
 })
 // FUNCTIONS TO START WITH PAGE LOAD END
