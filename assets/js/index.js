@@ -319,3 +319,9 @@ function displayPlayers(){
     })
 }
 // DISPLAY ALL PLAYERS FUNCTION IN ALL PLAYERS SECTION END
+
+// FUNCTIONS TO START WITH PAGE LOAD START
+document.addEventListener("DOMContentLoaded", () => {
+    getData()
+})
+// FUNCTIONS TO START WITH PAGE LOAD END
