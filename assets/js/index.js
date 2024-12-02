@@ -1,7 +1,7 @@
 // DECLARATION OF SECTIONS 
-const seel_all_players_section = document.getElementById("all-players-section")
+const see_all_players_section = document.getElementById("all-players-section")
 const players_reserve_section = document.getElementById("players-reserve")
-const filtered_players_section = document.getElementById("players-filtered")
+const filtered_players_section = document.getElementById("players-filtered");
 const see_all_players = document.querySelector(".see-all-players")
 
 // DECLARATION OF BUTTONS
@@ -57,3 +57,19 @@ async function getData(){
     }
 }
 // FETCHING DATA USING JSON END
+
+// HANDLE TOGGLE OF ALL PLAYERS SECTION START
+see_all_players_button.addEventListener("click",()=>{
+    if(isAllPlayersSectionOpen == false){
+        see_all_players_section.classList.remove("hidden")
+        see_all_players_section.classList.add("flex")
+        isAllPlayersSectionOpen = true
+        displayPlayers()
+    }else{
+        see_all_players_section.classList.remove("flex")
+        see_all_players_section.classList.add("hidden")
+        isAllPlayersSectionOpen = false
+    }
+    updateOpenCloseSection()
+})
+// HANDLE TOGGLE OF ALL PLAYERS SECTION END
