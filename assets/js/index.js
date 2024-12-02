@@ -41,3 +41,19 @@ let isFilteredPlayerSectionOpen = false
 let isReservePlayerSectionOpen = false
 let isReserve = false
 let new_player_card
+
+// FETCHING DATA USING JSON START
+async function getData(){
+    try{
+        const response = await fetch("assets/Data/players.json")
+        if(!response.ok){
+            throw new Error (`Response status: ${response.status}`)
+        }
+        const data = await response.json()
+        dataArray = data.players
+    }
+    catch (error){
+        console.error(error.message)
+    }
+}
+// FETCHING DATA USING JSON END
