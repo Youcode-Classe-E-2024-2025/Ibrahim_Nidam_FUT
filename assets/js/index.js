@@ -291,3 +291,31 @@ form.addEventListener("submit", e =>{
     add_player_form.classList.add("hidden")
 })
 // FORM HANDLING FUNCTION FOR ADDING AND EDITING THE PLAYERS END
+
+// DISPLAY ALL PLAYERS FUNCTION IN ALL PLAYERS SECTION START
+function displayPlayers(){
+    see_all_players.innerHTML=""
+    dataArray.forEach((element,index) => {
+        const div = document.createElement("div")
+        div.classList.add("relative", "text-light_orange-500", "text-[8px]", "cursor-pointer")
+        div.innerHTML = `
+            <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
+            <img class="w-14 h-14 absolute left-7 top-4" src="${element.photo}" alt="">
+            <img class="flag w-2 h-2 absolute left-5 top-1/3" src="${element.flag}" alt="">
+            <p class="position absolute left-[19px] font-bold top-3">${element.name} </p>
+            <p class="position absolute left-[18px] font-bold  top-7">${element.position}</p>
+            <p class="rating absolute left-5 top-[50px] font-bold ">${element.rating} </p>
+            <p class="shooting absolute left-4 top-[78px]">${element.position == "GK" ? "DIV" : "SHO"} :<span>${element.position == "GK" ? element.diving : element.shooting} </span></p>
+            <p class="pace absolute left-4 top-24">${element.position == "GK" ? "HAN :" : "PAC : "}<span>${element.position == "GK" ? element.handling : element.pace} </span></p>
+            <p class="passing absolute left-4 top-[87px]">${element.position == "GK" ? "KIC : " : "PAS : "}<span>${element.position == "GK" ? element.kicking : element.passing} </span></p>
+            <p class="dribbling absolute left-12 top-[78px]">${element.position == "GK" ? "REF :" : "DRI : "}<span>${element.position == "GK" ? element.reflexes : element.dribbling} </span></p>
+            <p class="defending absolute left-12 top-24">${element.position == "GK" ? "SPD : " : "DEF : "}<span>${element.position == "GK" ? element.speed : element.defending} </span></p>
+            <p class="physical absolute left-12 top-[87px]">${element.position == "GK" ? "POS : " : "PHY : "}<span>${element.position == "GK" ? element.positioning : element.physical} </span></p>
+        `
+        div.addEventListener("click",()=>{
+            dispplayCardCentered(element,index)
+        })
+        see_all_players.appendChild(div)
+    })
+}
+// DISPLAY ALL PLAYERS FUNCTION IN ALL PLAYERS SECTION END
