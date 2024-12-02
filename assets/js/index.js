@@ -564,6 +564,48 @@ positions.forEach(position => {
 })
 // POSITION PLAYERS INSIDE THE FIELD FUNCTION END
 
+// HANDLE LABLE CLICK FOR MOBILE START
+positions.forEach(position => {
+    handleLabelClick(position)
+})
+
+function handleLabelClick(targetPosition){
+    const placeholder_card = document.getElementById(`${targetPosition.toLowerCase()}-placeholder`);
+    const player_card = document.getElementById(`${targetPosition.toLowerCase()}-player-card`);
+    const label = document.querySelector(`.${targetPosition}-TEXT`);
+
+    label.addEventListener("click",event => {
+        event.stopPropagation()
+        if(placeholder_card.classList.contains("hidden")){
+            placeholder_card.classList.remove("hidden")
+            placeholder_card.classList.add("flex")
+            
+            if(player_card){
+                player_card.classList.add("hidden")
+            }
+        } else {
+            placeholder_card.classList.add("hidden")
+            placeholder_card.classList.remove("flex")
+        }
+    })
+
+    // HIDE CARDS ON CLICK OUTSIDE START
+    document.addEventListener("click", event => {
+        const is_outside_placeholder = !placeholder_card.contains(event.target)
+        const is_outside_player_card = !player_card || !player_card.contains(event.target)
+        const is_outside_label = !label.contains(event.target)
+        if(is_outside_placeholder && is_outside_label && is_outside_player_card){
+            placeholder_card.classList.add("hidden")
+            placeholder_card.classList.remove("flex")
+            if(player_card){
+                player_card.classList.add("hidden")
+            }
+        }
+    })
+    // HIDE CARDS ON CLICK OUTSIDE END
+}
+// HANDLE LABLE CLICK FOR MOBILE END
+
 // FUNCTIONS TO START WITH PAGE LOAD START
 document.addEventListener("DOMContentLoaded", () => {
     getData()
