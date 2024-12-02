@@ -313,12 +313,108 @@ function displayPlayers(){
             <p class="physical absolute left-12 top-[87px]">${element.position == "GK" ? "POS : " : "PHY : "}<span>${element.position == "GK" ? element.positioning : element.physical} </span></p>
         `
         div.addEventListener("click",()=>{
-            dispplayCardCentered(element,index)
+            displayCardCentered(element,index)
         })
         see_all_players.appendChild(div)
     })
 }
 // DISPLAY ALL PLAYERS FUNCTION IN ALL PLAYERS SECTION END
+
+// FUNCTION TO DISPLAY CARDS CENTERED TO EDIT OR DELETE START
+function displayCardCentered(element,index){
+    const lay_over = document.createElement("div")
+    lay_over.classList.add("fixed", "inset-0", "bg-black", "bg-opacity-50", "z-50","flex", "items-center", "justify-center", "p-4")
+
+    const container = document.createElement("div")
+    container.classList.add("flex", "items-center", "space-x-4")
+
+    const enlarged_card_div = document.createElement("div")
+    enlarged_card_div.classList.add("relative", "text-light_orange-500", "text-[8px]","transform", "scale-150", "origin-center")
+
+    enlarged_card_div.innerHTML = `
+        <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
+        <img class="w-14 h-14 absolute left-7 top-4" src="${element.photo}" alt="">
+        <img class="flag w-2 h-2 absolute left-5 top-1/3" src="${element.flag}" alt="">
+        <p class="position absolute left-[19px] font-bold top-3">${element.name} </p>
+        <p class="position absolute left-[18px] font-bold  top-7">${element.position}</p>
+        <p class="rating absolute left-5 top-[50px] font-bold ">${element.rating} </p>
+        <p class="shooting absolute left-4 top-[78px]">${element.position == "GK" ? "DIV" : "SHO"} :<span>${element.position == "GK" ? element.diving : element.shooting} </span></p>
+        <p class="pace absolute left-4 top-24">${element.position == "GK" ? "HAN :" : "PAC : "}<span>${element.position == "GK" ? element.handling : element.pace} </span></p>
+        <p class="passing absolute left-4 top-[87px]">${element.position == "GK" ? "KIC : " : "PAS : "}<span>${element.position == "GK" ? element.kicking : element.passing} </span></p>
+        <p class="dribbling absolute left-12 top-[78px]">${element.position == "GK" ? "REF :" : "DRI : "}<span>${element.position == "GK" ? element.reflexes : element.dribbling} </span></p>
+        <p class="defending absolute left-12 top-24">${element.position == "GK" ? "SPD : " : "DEF : "}<span>${element.position == "GK" ? element.speed : element.defending} </span></p>
+        <p class="physical absolute left-12 top-[87px]">${element.position == "GK" ? "POS : " : "PHY : "}<span>${element.position == "GK" ? element.positioning : element.physical} </span></p>
+    `
+    const buttons_div = document.createElement("div")
+    buttons_div.classList.add("flex", "flex-col", "space-y-2")
+
+    // HANDLE EDIT BUTTON START
+    const edit_button = document.createElement("button")
+    edit_button.textContent = "Edit"
+    edit_button.classList.add("ml-2","bg-denim-100","border-2","border-light_orange-400", "text-white", "p-2", "w-full", "transform", "active:scale-90", "transition" ,"duration-150")
+    edit_button.addEventListener("click",() => {
+        add_player_form.classList.remove("hidden")
+        document.body.removeChild(lay_over)
+        editIndex = index
+        editPlayer(editIndex)
+    })
+    // HANDLE EDIT BUTTON END
+
+    // HANDLE DELETE BUTTON START
+    const delete_button = document.createElement("button")
+    delete_button.textContent = "Delete"
+    delete_button.classList.add("ml-2","bg-light_orange-400","border-2","border-denim-100" ,"text-white", "p-2", "w-full", "transform", "active:scale-90", "transition" ,"duration-150")
+    delete_button.addEventListener("click",() => {
+        dataArray.splice(index,1)
+        document.body.removeChild(lay_over)
+        displayPlayers()
+    })
+    // HANDLE DELETE BUTTON END
+
+    // HANDLE IF PLAYER REMOVED IS IN THE FIELD START
+    const deleted_player_position = element.position
+    const deleted_player_name = element.name
+    selected_player.forEach(player => {
+        if(player.name === deleted_player_name && player.position === deleted_player_position){
+            selected_player.delete(player)
+
+            const placeholder_card = document.getElementById(`${deleted_player_position.toLowerCase()}-placeholder`)
+            if(placeholder_card){
+                placeholder_card.innerHTML = `
+                    <div class="relative items-center justify-center font-bold text-light_orange-500 hidden 680:flex">
+                        <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
+                        <div class="absolute flex items-center justify-center inset-0 cursor-pointer">
+                            <span class="flex items-center justify-center">
+                                <svg class="w-9 h-8" viewBox="0 0 36 42" fill="none">
+                                    <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" 
+                                        stroke="currentColor" stroke-width="1.5"></path>
+                                </svg>
+                            </span>
+                            <div class="absolute text-xl font-bold text-center">+</div>
+                        </div>
+                    </div>
+                `
+                placeholder_card.classList.remove("flex")
+                placeholder_card.classList.add("hidden")
+            }
+        }
+        // HANDLE IF PLAYER REMOVED IS IN THE FIELD END
+    })
+    buttons_div.appendChild(edit_button)
+    buttons_div.appendChild(delete_button)
+
+    container.appendChild(enlarged_card_div)
+    container.appendChild(buttons_div)
+
+    lay_over.appendChild(container)
+    lay_over.addEventListener("click", e => {
+        if(e.target === lay_over){
+            document.body.removeChild(lay_over)
+        }
+    })
+    document.body.appendChild(lay_over)
+}
+// FUNCTION TO DISPLAY CARDS CENTERED TO EDIT OR DELETE END
 
 // FUNCTIONS TO START WITH PAGE LOAD START
 document.addEventListener("DOMContentLoaded", () => {
