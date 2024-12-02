@@ -455,6 +455,87 @@ function editPlayer(index){
 }
 // FUNCTION TO POPULATE THE EDIT FORM END
 
+// FUNCTION TO FILTER THE PLAYERS FOR FILTERED SECTION START
+function getPlayersByPosition(position){
+    return dataArray.filter(player => player.position === position && !Array.from(selected_player).some(item => item.name === player.name) && !Array.from(reserve_selected_player).some(item => item.name === player.name))
+}
+// FUNCTION TO FILTER THE PLAYERS FOR FILTERED SECTION END
+
+// FUNCTION TO POPULATE FILTERED SECTION START
+function populatePlayersSection(targetPosition){
+    const players_container = filtered_players_section.querySelector(".filtered-players")
+    players_container.innerHTML = ""
+
+    const position_players = getPlayersByPosition(targetPosition)
+
+    if(position_players.length === 0){
+        filtered_players_section.classList.add("hidden")
+        return
+    }
+
+    position_players.forEach(player => {
+        const player_card = document.createElement("div")
+        player_card.classList.add("relative", "text-light_orange-500", "text-[8px]", "cursor-pointer")
+
+        player_card.innerHTML = `
+            <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
+            <img class="w-14 h-14 absolute left-7 top-4" src="${player.photo}" alt="">
+            <div class="flag w-2 h-2 absolute left-5 top-11" style="background-image: url(${player.flag}); background-size: contain; background-repeat: no-repeat;"></div>
+            <p class="position absolute left-[19px] font-bold top-3">${player.name} </p>
+            <p class="position absolute left-[18px] font-bold  top-7">${player.position}</p>
+            <p class="rating absolute left-5 top-[50px] font-bold ">${player.rating} </p>
+            <p class="shooting absolute left-4 top-[78px]">${player.position == "GK" ? "DIV" : "SHO"} :<span>${player.position == "GK" ? player.diving : player.shooting} </span></p>
+            <p class="pace absolute left-4 top-24">${player.position == "GK" ? "HAN :" : "PAC : "}<span>${player.position == "GK" ? player.handling : player.pace} </span></p>
+            <p class="passing absolute left-4 top-[87px]">${player.position == "GK" ? "KIC : " : "PAS : "}<span>${player.position == "GK" ? player.kicking : player.passing} </span></p>
+            <p class="dribbling absolute left-12 top-[78px]">${player.position == "GK" ? "REF :" : "DRI : "}<span>${player.position == "GK" ? player.reflexes : player.dribbling} </span></p>
+            <p class="defending absolute left-12 top-24">${player.position == "GK" ? "SPD : " : "DEF : "}<span>${player.position == "GK" ? player.speed : player.defending} </span></p>
+            <p class="physical absolute left-12 top-[87px]">${player.position == "GK" ? "POS : " : "PHY : "}<span>${player.position == "GK" ? player.positioning : player.physical} </span></p>
+        `
+        player_card.addEventListener("click", ()=>{
+            const placeholder_card = document.getElementById(`${targetPosition.toLowerCase()}-placeholder`)
+            const previous_player_for_position = Array.from(selected_player).find(player => player.position === targetPosition)
+
+            if(previous_player_for_position){
+                selected_player.delete(previous_player_for_position)
+            }
+
+            placeholder_card.innerHTML = `
+                <div class="relative text-light_orange-500 cursor-pointer text-[8px] font-normal 680:block">
+                    <img src="assets/images/Player/Player_card.png" alt="Player Card" class="w-[90px] h-auto">
+                    <img class="w-14 h-14 absolute left-7 top-4" src="${player.photo}" alt="">
+                    <div class="flag w-2 h-2 absolute left-5 top-1/3" style="background-image: url(${player.flag}); background-size: contain; background-repeat: no-repeat;"></div>
+                    <p class="position absolute left-[19px] font-bold top-3">${player.name} </p>
+                    <p class="position absolute left-[18px] font-bold top-7">${player.position}</p>
+                    <p class="rating absolute left-5 top-[50px] font-bold">${player.rating}</p>
+                    <p class="shooting absolute left-4 top-[78px]">${player.position == "GK" ? "DIV" : "SHO"} : <span>${player.position == "GK" ? player.diving : player.shooting}</span></p>
+                    <p class="pace absolute left-4 top-24">${player.position == "GK" ? "HAN :" : "PAC : "}<span>${player.position == "GK" ? player.handling : player.pace}</span></p>
+                    <p class="passing absolute left-4 top-[87px]">${player.position == "GK" ? "KIC : " : "PAS : "}<span>${player.position == "GK" ? player.kicking : player.passing}</span></p>
+                    <p class="dribbling absolute left-12 top-[78px]">${player.position == "GK" ? "REF :" : "DRI : "}<span>${player.position == "GK" ? player.reflexes : player.dribbling}</span></p>
+                    <p class="defending absolute left-12 top-24">${player.position == "GK" ? "SPD : " : "DEF : "}<span>${player.position == "GK" ? player.speed : player.defending}</span></p>
+                    <p class="physical absolute left-12 top-[87px]">${player.position == "GK" ? "POS : " : "PHY : "}<span>${player.position == "GK" ? player.positioning : player.physical}</span></p>
+                </div>
+            `
+            // FOR DESKTOP
+            placeholder_card.classList.remove("hidden")
+            placeholder_card.classList.add("flex")
+
+            // FOR MOBILE
+            placeholder_card.classList.remove("680:hidden")
+            placeholder_card.classList.add("680:block")
+
+            selected_player.add({name: player.name, position: player.position})
+            filtered_players_section.classList.add("hidden")
+            isFilteredPlayerSectionOpen = false
+            updateOpenCloseSection()
+        })
+        players_container.appendChild(player_card)
+    })
+    filtered_players_section.classList.remove("hidden")
+    isFilteredPlayerSectionOpen = true
+    updateOpenCloseSection()
+}
+// FUNCTION TO POPULATE FILTERED SECTION END
+
 // FUNCTIONS TO START WITH PAGE LOAD START
 document.addEventListener("DOMContentLoaded", () => {
     getData()
