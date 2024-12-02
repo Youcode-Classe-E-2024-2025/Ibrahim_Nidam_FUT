@@ -368,8 +368,7 @@ function displayCardCentered(element,index){
         dataArray.splice(index,1)
         document.body.removeChild(lay_over)
         displayPlayers()
-    })
-    // HANDLE DELETE BUTTON END
+    
 
     // HANDLE IF PLAYER REMOVED IS IN THE FIELD START
     const deleted_player_position = element.position
@@ -398,7 +397,9 @@ function displayCardCentered(element,index){
                 placeholder_card.classList.add("hidden")
             }
         }
-        // HANDLE IF PLAYER REMOVED IS IN THE FIELD END
+    })
+    // HANDLE IF PLAYER REMOVED IS IN THE FIELD END
+    // HANDLE DELETE BUTTON END
     })
     buttons_div.appendChild(edit_button)
     buttons_div.appendChild(delete_button)
